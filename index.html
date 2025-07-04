@@ -273,7 +273,7 @@
     }
 
     async function fetchAirData(lat, lon) {
-      const url = `http://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=e5e635df-37a8-4ac7-b712-2a0207578385`;
+      const url = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=e5e635df-37a8-4ac7-b712-2a0207578385`;
       try {
         const response = await fetch(url);
         const json = await response.json();
