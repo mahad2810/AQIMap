@@ -273,42 +273,43 @@
     }
 
     async function fetchAirData(lat, lon) {
-      const url = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=e5e635df-37a8-4ac7-b712-2a0207578385`;
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        if (json.status === "success") {
-          const d = json.data;
-          return {
-            city: d.city,
-            state: d.state,
-            country: d.country,
-            pollution: {
-              maincn: d.current.pollution.maincn,
-              aqicn: d.current.pollution.aqicn
-            },
-            weather: {
-              tp: d.current.weather.tp,
-              hu: d.current.weather.hu,
-              pr: d.current.weather.pr,
-              ws: d.current.weather.ws,
-              wd: d.current.weather.wd
-            }
-          };
-        } else {
-          throw new Error("Air data fetch failed");
+  const url = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=e5e635df-37a8-4ac7-b712-2a0207578385`;
+  try {
+    const response = await fetch(url);
+    const json = await response.json();
+    if (json.status === "success") {
+      const d = json.data;
+      return {
+        city: d.city,
+        state: d.state,
+        country: d.country,
+        pollution: {
+          maincn: d.current.pollution.maincn,
+          aqicn: d.current.pollution.aqicn
+        },
+        weather: {
+          tp: d.current.weather.tp,
+          hu: d.current.weather.hu,
+          pr: d.current.weather.pr,
+          ws: d.current.weather.ws,
+          wd: d.current.weather.wd
         }
-      } catch (error) {
-        console.error('Error fetching air data:', error);
-        return {
-          city: 'N/A',
-          state: 'N/A',
-          country: 'N/A',
-          pollution: { maincn: 'N/A', aqicn: 0 },
-          weather: { tp: 'N/A', hu: 'N/A', pr: 'N/A', ws: 'N/A', wd: 'N/A' }
-        };
-      }
+      };
+    } else {
+      throw new Error("Air data fetch failed");
     }
+  } catch (error) {
+    console.error('Error fetching air data:', error);
+    return {
+      city: 'N/A',
+      state: 'N/A',
+      country: 'N/A',
+      pollution: { maincn: 'N/A', aqicn: 0 },
+      weather: { tp: 'N/A', hu: 'N/A', pr: 'N/A', ws: 'N/A', wd: 'N/A' }
+    };
+  }
+}
+
 
     function showError(error) {
       let message;
